@@ -3,12 +3,15 @@ import AddNewEmployee from "./components/AddNewEmployee";
 import EmployeeTable from "./components/EmployeeTable";
 import LinkButtons from "./components/LinkButtons";
 
-const EmployeesPage = () => {
-  const [localEffect, setLocalEffect] = useState(0);
+function EmployeesPage() {
+  const [localEffect, setLocalEffect] = useState<number>(0);
 
-  const onRecallAPI = useCallback(() => {
-    setLocalEffect(localEffect + 1);
-  }, [localEffect]);
+  const onRecallAPI = useCallback(
+    function () {
+      setLocalEffect(localEffect + 1);
+    },
+    [localEffect]
+  );
 
   return (
     <div className="employees">
@@ -18,6 +21,6 @@ const EmployeesPage = () => {
       <LinkButtons />
     </div>
   );
-};
+}
 
 export default EmployeesPage;

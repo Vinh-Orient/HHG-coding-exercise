@@ -2,12 +2,12 @@ import { Button, Form, FormInstance, Input } from "antd";
 
 const { Item } = Form;
 
-type employeeFormType = {
+type EmployeeFormType = {
   onCreateEmployee: (values: any) => void;
   employeeForm: FormInstance;
 };
 
-const EmployeeForm = ({ onCreateEmployee, employeeForm }: employeeFormType) => {
+function EmployeeForm({ onCreateEmployee, employeeForm }: EmployeeFormType) {
   return (
     <Form
       labelCol={{
@@ -16,7 +16,10 @@ const EmployeeForm = ({ onCreateEmployee, employeeForm }: employeeFormType) => {
       wrapperCol={{
         sm: { span: 20 },
       }}
-      onFinish={onCreateEmployee}
+      onFinish={function (employee) {
+        onCreateEmployee(employee);
+        employeeForm.resetFields();
+      }}
       form={employeeForm}
       className="employees--form"
     >
@@ -48,6 +51,6 @@ const EmployeeForm = ({ onCreateEmployee, employeeForm }: employeeFormType) => {
       </Item>
     </Form>
   );
-};
+}
 
 export default EmployeeForm;

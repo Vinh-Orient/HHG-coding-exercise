@@ -1,51 +1,45 @@
 import { Table, TablePaginationConfig } from "antd";
-import { get } from "api";
+import { DEFAULT_TABLE_PAGINATION } from "config/constant";
+import { useGetEmployees } from "hooks/useGetEmployees";
 import { useCallback, useEffect, useState } from "react";
 import columns from "./components/columns";
 
-type employeeTableType = {
+type EmployeeTableType = {
   effect: number;
 };
 
-const EmployeeTable = ({ effect }: employeeTableType) => {
-  const [total, setTotal] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [employees, setEmployees] = useState([]);
-  const [localEffect] = useState(0);
+function EmployeeTable({ effect }: EmployeeTableType) {
+  const {
+    employeeCollection,
+    loadEmployeeCollection,
+    totalEmployees,
+    isLoading,
+  } = useGetEmployees();
+  const [localEffect] = useState<number>(0);
 
-  const onHandleSetEmployees = useCallback(async (page = 1, limit = 5) => {
-    setIsLoading(true);
-    try {
-      const { data: apiResponse } = await get("employees", {
-        order: "desc",
-        sortBy: "createdAt",
-        page,
-        limit,
-      });
-      setTotal(apiResponse.total);
-      setEmployees(apiResponse.data);
-    } catch (error) {
-      console.log("error :>> ", error);
-    }
-    setIsLoading(false);
-  }, []);
+  useEffect(
+    function () {
+      loadEmployeeCollection();
+    },
+    [loadEmployeeCollection]
+  );
 
-  useEffect(() => {
-    onHandleSetEmployees();
-  }, [onHandleSetEmployees]);
-
-  useEffect(() => {
-    if (effect > localEffect) {
-      onHandleSetEmployees();
-    }
-  }, [effect, localEffect, onHandleSetEmployees]);
+  useEffect(
+    function () {
+      if (effect > localEffect) {
+        loadEmployeeCollection();
+      }
+    },
+    [effect, loadEmployeeCollection, localEffect]
+  );
 
   const onChangePagination = useCallback(
-    ({ current }: TablePaginationConfig) => {
-      console.log("current :>> ", current);
-      onHandleSetEmployees(current);
+    function ({ current }: TablePaginationConfig) {
+      loadEmployeeCollection({
+        page: current,
+      });
     },
-    [onHandleSetEmployees]
+    [loadEmployeeCollection]
   );
 
   return (
@@ -55,16 +49,16 @@ const EmployeeTable = ({ effect }: employeeTableType) => {
         bordered
         loading={isLoading}
         columns={columns}
-        dataSource={employees}
+        dataSource={employeeCollection}
         size="middle"
         pagination={{
-          pageSize: 5,
-          total,
+          ...DEFAULT_TABLE_PAGINATION,
+          total: totalEmployees,
         }}
         onChange={onChangePagination}
       />
     </div>
   );
-};
+}
 
 export default EmployeeTable;

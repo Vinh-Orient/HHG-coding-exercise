@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 
-const LinkButtons = () => {
+function LinkButtons() {
   return (
     <div className="counter__buttons-container">
       <Button className="counter__button">
@@ -12,6 +12,6 @@ const LinkButtons = () => {
       </Button>
     </div>
   );
-};
+}
 
 export default LinkButtons;

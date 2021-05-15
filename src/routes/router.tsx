@@ -1,10 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { IRouter } from "types/router/interface";
 
-const renderRoute = (
-  { Component, path, isExact }: IRouter,
-  parentProps?: any
-) => {
+function renderRoute({ Component, path, isExact }: IRouter, parentProps?: any) {
   return (
     <Route
       exact={isExact}
@@ -13,9 +10,9 @@ const renderRoute = (
       render={(props) => <Component {...props} {...parentProps} />}
     />
   );
-};
+}
 
-const renderRoutes = (routes: IRouter[], props?: any) => {
+function renderRoutes(routes: IRouter[], props?: any) {
   return (
     <BrowserRouter>
       <Switch>
@@ -23,6 +20,6 @@ const renderRoutes = (routes: IRouter[], props?: any) => {
       </Switch>
     </BrowserRouter>
   );
-};
+}
 
 export { renderRoutes };
