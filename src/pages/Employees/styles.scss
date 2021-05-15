@@ -1,0 +1,39 @@
+.employees {
+  padding-top: 100px;
+  h1 {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  &__buttons-container {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__button {
+    margin: 0 20px;
+    height: 50px;
+    font-weight: bold;
+  }
+
+  &__table {
+    padding: 0 20px;
+  }
+
+  &--add-new {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+  }
+
+  &--form {
+    &--item,
+    .ant-form-item-control-input-content {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

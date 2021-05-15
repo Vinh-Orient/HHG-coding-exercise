@@ -1,0 +1,20 @@
+.home {
+  padding-top: 100px;
+  h1 {
+    font-size: 40px;
+    text-align: center;
+  }
+
+  &__buttons-container {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__button {
+    margin: 0 20px;
+    height: 50px;
+    font-weight: bold;
+  }
+}
