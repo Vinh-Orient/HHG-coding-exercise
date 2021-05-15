@@ -11,9 +11,9 @@ type EmployeeTableType = {
 function EmployeeTable({ effect }: EmployeeTableType) {
   const {
     employeeCollection,
-    loadEmployeeCollection,
     totalEmployees,
     isLoading,
+    loadEmployeeCollection,
   } = useGetEmployees();
   const [localEffect] = useState<number>(0);
 

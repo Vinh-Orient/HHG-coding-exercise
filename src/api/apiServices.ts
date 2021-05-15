@@ -1,7 +1,8 @@
 import api from "./axiosConfig";
 
-const HOST =
-  process.env.API_HOST || "https://609eb050c290190017f104d6.mockapi.io/api";
+const HOST = process.env.REACT_APP_API_HOST;
+
+console.log("HOST :>> ", HOST);
 
 const get = (url: string, params = {}) => {
   return api.get(`${HOST}/${url}`, params);

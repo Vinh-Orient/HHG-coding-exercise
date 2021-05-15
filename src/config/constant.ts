@@ -12,6 +12,7 @@ const DEFAULT_TABLE_PAGINATION = {
   pageSize: 5,
   defaultCurrent: 1,
   defaultPageSize: 5,
+  showQuickJumper: false,
 };
 
 const DEFAULT_PAGINATION = {
